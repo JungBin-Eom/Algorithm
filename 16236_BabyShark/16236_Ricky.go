@@ -36,7 +36,7 @@ func main() {
 	for i := 0; i < N; i++ {
 		for j := 0; j < N; j++ {
 			node := queue.Node{i, j}
-			q.enque(&node)
+			q.Enque(&node)
 			fmt.Scan(&fish)
 			if fish == 9 {
 				sharkX = i

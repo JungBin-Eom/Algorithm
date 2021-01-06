@@ -19,12 +19,12 @@ type Queue struct {
 	count int
 }
 
-func (s *Queue) enque(n *Node) {
+func (s *Queue) Enque(n *Node) {
 	s.nodes = append(s.nodes[:s.count], n)
 	s.count++
 }
 
-func (s *Queue) deque() *Node {
+func (s *Queue) Deque() *Node {
 	if s.count == 0 {
 		return nil
 	}
