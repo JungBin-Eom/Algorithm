@@ -3,11 +3,11 @@ package queue
 import "fmt"
 
 type Node struct {
-	X, Y int
+	X, Y, dist int
 }
 
 func (n *Node) String() string {
-	return fmt.Sprint(n.X, n.Y)
+	return fmt.Sprint(n.X) + " " + fmt.Sprint(n.Y) + " " + fmt.Sprint(n.dist)
 }
 
 func NewQueue() *Queue {
@@ -32,4 +32,8 @@ func (s *Queue) Deque() *Node {
 	result := s.nodes[0]
 	s.nodes = s.nodes[1:]
 	return result
+}
+
+func (s *Queue) Size() int {
+	return len(s.nodes)
 }
