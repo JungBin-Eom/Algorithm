@@ -3,11 +3,11 @@ package queue
 import "fmt"
 
 type Node struct {
-	X, Y, dist int
+	X, Y, Dist int
 }
 
 func (n *Node) String() string {
-	return fmt.Sprint(n.X) + " " + fmt.Sprint(n.Y) + " " + fmt.Sprint(n.dist)
+	return fmt.Sprint(n.X) + " " + fmt.Sprint(n.Y) + " " + fmt.Sprint(n.Dist)
 }
 
 func NewQueue() *Queue {
