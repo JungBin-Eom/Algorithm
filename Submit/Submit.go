@@ -179,7 +179,7 @@ func main() {
 			}
 			q = NewQueue()
 			q.Enque(&Node{sharkX,sharkY,0})
-		} 
+		}  
 		// fmt.Println(mySea)
 		// fmt.Println("Shark is at X: ", nowNode.X, " Y: ", nowNode.Y)
 		// fmt.Println("Total count: ", totalCount)

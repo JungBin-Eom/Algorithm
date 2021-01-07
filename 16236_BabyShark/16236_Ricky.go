@@ -155,5 +155,6 @@ func main() {
 	// fmt.Println(mySea)
 	// fmt.Println("Shark is at X: ", sharkX, " Y: ", sharkY)
 	// fmt.Println("Total count: ", totalCount)
+	
 	fmt.Println(totalCount)
 }
