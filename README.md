@@ -13,3 +13,4 @@
 |번호|Ricky|YumYumNyang|
 |:---:|:---:|:---:|
 |16236 아기상어|https://jbhs7014.tistory.com/120|-|
+|14501 퇴사|-|-|
