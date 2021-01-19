@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Algorithm/16236_BabyShark/queue"
+	"Algorithm/Datastructure/queue"
 	"fmt"
 	"sort"
 )
@@ -74,19 +74,19 @@ func main() {
 				eat = append(eat, nowNode)
 			}
 			if nowNode.X-1 >= 0 && visited[nowNode.X-1][nowNode.Y] == 0 && mySea[nowNode.X-1][nowNode.Y] <= shark { // 위쪽
-				q.Enque(&queue.Node{nowNode.X - 1, nowNode.Y, nowNode.Dist+1})
+				q.Enque(&queue.Node{nowNode.X - 1, nowNode.Y, nowNode.Dist + 1})
 				visited[nowNode.X-1][nowNode.Y] = 1
 			}
 			if nowNode.Y-1 >= 0 && visited[nowNode.X][nowNode.Y-1] == 0 && mySea[nowNode.X][nowNode.Y-1] <= shark { // 왼쪽
-				q.Enque(&queue.Node{nowNode.X, nowNode.Y - 1, nowNode.Dist+1})
+				q.Enque(&queue.Node{nowNode.X, nowNode.Y - 1, nowNode.Dist + 1})
 				visited[nowNode.X][nowNode.Y-1] = 1
 			}
 			if nowNode.Y+1 < N && visited[nowNode.X][nowNode.Y+1] == 0 && mySea[nowNode.X][nowNode.Y+1] <= shark { // 오른쪽
-				q.Enque(&queue.Node{nowNode.X, nowNode.Y + 1, nowNode.Dist+1})
+				q.Enque(&queue.Node{nowNode.X, nowNode.Y + 1, nowNode.Dist + 1})
 				visited[nowNode.X][nowNode.Y+1] = 1
 			}
 			if nowNode.X+1 < N && visited[nowNode.X+1][nowNode.Y] == 0 && mySea[nowNode.X+1][nowNode.Y] <= shark { // 아래쪽
-				q.Enque(&queue.Node{nowNode.X + 1, nowNode.Y, nowNode.Dist+1})
+				q.Enque(&queue.Node{nowNode.X + 1, nowNode.Y, nowNode.Dist + 1})
 				visited[nowNode.X+1][nowNode.Y] = 1
 			}
 		}
@@ -108,7 +108,7 @@ func main() {
 				visited[i] = make([]int, N)
 			}
 			q = queue.NewQueue()
-			q.Enque(&queue.Node{sharkX,sharkY,0})
+			q.Enque(&queue.Node{sharkX, sharkY, 0})
 		} else {
 			// eat sort해야함
 			sort.Slice(eat, func(i, j int) bool {
@@ -117,17 +117,17 @@ func main() {
 						if eat[i].X <= eat[j].X {
 							if eat[i].X == eat[j].X {
 								if eat[i].Y < eat[j].Y {
-									return true;
+									return true
 								}
-								return false;
+								return false
 							}
-							return true;
+							return true
 						}
-						return false;
+						return false
 					}
-					return true;
+					return true
 				}
-				return false;
+				return false
 			})
 			mySea[eat[0].X][eat[0].Y] = 0
 			sharkX = eat[0].X
@@ -143,8 +143,8 @@ func main() {
 				visited[i] = make([]int, N)
 			}
 			q = queue.NewQueue()
-			q.Enque(&queue.Node{sharkX,sharkY,0})
-		} 
+			q.Enque(&queue.Node{sharkX, sharkY, 0})
+		}
 		// fmt.Println(mySea)
 		// fmt.Println("Shark is at X: ", nowNode.X, " Y: ", nowNode.Y)
 		// fmt.Println("Total count: ", totalCount)
@@ -155,6 +155,6 @@ func main() {
 	// fmt.Println(mySea)
 	// fmt.Println("Shark is at X: ", sharkX, " Y: ", sharkY)
 	// fmt.Println("Total count: ", totalCount)
-	
+
 	fmt.Println(totalCount)
 }

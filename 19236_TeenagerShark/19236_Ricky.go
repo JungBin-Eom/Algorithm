@@ -1,9 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"Algorithm/19236_TeenagerShark/queue"
+)
 
 type fish struct {
 	x, y, fishNum, direction int
+}
+
+type element struct {
+	fishes []fish
+	area [][]fish
+	sharkX, sharkY, sharkDirection int
 }
 
 func main() {
