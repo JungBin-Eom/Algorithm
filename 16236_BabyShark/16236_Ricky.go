@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Algorithm/Datastructure/queue"
+	"Algorithm/16236_BabyShark/queue"
 	"fmt"
 	"sort"
 )
@@ -155,6 +155,5 @@ func main() {
 	// fmt.Println(mySea)
 	// fmt.Println("Shark is at X: ", sharkX, " Y: ", sharkY)
 	// fmt.Println("Total count: ", totalCount)
-
 	fmt.Println(totalCount)
 }
