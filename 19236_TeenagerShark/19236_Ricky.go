@@ -38,7 +38,7 @@ func (q *Queue) Pop() (Element, bool) {
 }
 
 func main() {
-	fmt.Printf("\n\n\n\n\n\n\n")
+	// fmt.Printf("\n\n\n\n\n\n\n")
 	var fishNum, direction int
 	var sharkX, sharkY, sharkDirection, eat, bestEat int
 
@@ -75,29 +75,28 @@ func main() {
 		if ok == false {
 			break
 		} else {
-			fishes = nowElement.fishes
-			area = nowElement.area
+			copy(fishes, nowElement.fishes)
+			copy(area, nowElement.area)
 			eat = nowElement.eat
 			sharkX = nowElement.sharkX
 			sharkY = nowElement.sharkY
 			sharkDirection = nowElement.sharkDirection
-
 			if eat > bestEat {
 				bestEat = eat
 			}
-			fmt.Println("지금 상태의 상어는 ", eat, "만큼 먹었고 지금까지 최대값은 ", bestEat, "입니다.")
+			// fmt.Println("지금 상태의 상어는 ", eat, "만큼 먹었고 지금까지 최대값은 ", bestEat, "입니다.")
 
 			// 물고기 이동
 			for i := 0; i < 16; i++ {
 				var newX, newY, rotateCount int
 
-				fmt.Println("물고기 목록: ", fishes)
+				// fmt.Println("물고기 목록: ", fishes)
 				if fishes[i].direction == 0 {
-					fmt.Println(i+1, "번째 물고기는 이미 먹혔으므로 이동하지 않습니다.")
-					fmt.Println("========")
+					// fmt.Println(i+1, "번째 물고기는 이미 먹혔으므로 이동하지 않습니다.")
+					// fmt.Println("========")
 					rotateCount = 8
 				} else {
-					fmt.Println(i+1, "번 물고기 이동")
+					// fmt.Println(i+1, "번 물고기 이동")
 				}
 				for rotateCount != 8 {
 					switch fishes[i].direction {
@@ -138,10 +137,10 @@ func main() {
 						tempX := fishes[i].x
 						tempY := fishes[i].y
 						if area[newX][newY].fishNum == 0 {
-							fmt.Println("빈칸으로 이동")
+							// fmt.Println("빈칸으로 이동")
 							fishes[i].x, fishes[i].y = newX, newY
 						} else {
-							fmt.Println(area[newX][newY].fishNum, "번 물고기와 교체 ")
+							// fmt.Println(area[newX][newY].fishNum, "번 물고기와 교체 ")
 							fishes[area[newX][newY].fishNum-1].x, fishes[i].x = fishes[i].x, newX
 							fishes[area[newX][newY].fishNum-1].y, fishes[i].y = fishes[i].y, newY
 						}
@@ -154,23 +153,23 @@ func main() {
 						// fishes[area[newX][newY].fishNum-1].y = fishes[i].y
 						// fishes[i].y = tempY
 
-						fmt.Println("이동 전 area")
-						for k := 0; k < 4; k++ {
-							fmt.Println(area[k])
-						}
+						// fmt.Println("이동 전 area")
+						// for k := 0; k < 4; k++ {
+						// 	fmt.Println(area[k])
+						// }
 
-						fmt.Println(area[newX][newY], "<=>", area[tempX][tempY])
+						// fmt.Println(area[newX][newY], "<=>", area[tempX][tempY])
 
 						area[newX][newY], area[tempX][tempY] = area[tempX][tempY], area[newX][newY]
 						area[newX][newY].x, area[tempX][tempY].x = area[tempX][tempY].x, area[newX][newY].x
 						area[newX][newY].y, area[tempX][tempY].y = area[tempX][tempY].y, area[newX][newY].y
 
-						fmt.Println("이동 후 area")
-						for k := 0; k < 4; k++ {
-							fmt.Println(area[k])
-						}
+						// fmt.Println("이동 후 area")
+						// for k := 0; k < 4; k++ {
+						// 	fmt.Println(area[k])
+						// }
 
-						fmt.Println("=========")
+						// fmt.Println("=========")
 
 						break
 					}
@@ -180,6 +179,7 @@ func main() {
 			// 상어 이동
 			var newSharkX, newSharkY int
 			for i := 1; i < 4; i++ { // i칸 이동하는 경우를 모두 구해야 함(최대 3칸)
+				// fmt.Printf("상어가 %d방향으로 %d칸 이동합니다.\n", sharkDirection, i)
 				switch sharkDirection {
 				case 1:
 					newSharkX, newSharkY = sharkX-i, sharkY
@@ -199,17 +199,29 @@ func main() {
 					newSharkX, newSharkY = sharkX-i, sharkY+i
 				}
 				if newSharkX < 0 || newSharkX > 3 || newSharkY < 0 || newSharkY > 3 { // 범위를 벗어나는 경우
-					break
+					// do nothing
+					// 상어가 이동하지 않습니다.
+					// fmt.Println("상어가 범위를 벗어났습니다.")
 				} else if area[newSharkX][newSharkY].fishNum == 0 { // 물고기가 없는 칸으로 갈 경우
-					break
+					// do nothing
+					// 상어가 이동하지 않습니다.
+					// fmt.Println("상어가 물고기를 찾지 못했습니다.")
 				} else { // 물고기 만나는 경우
-					sharkX, sharkY = newSharkX, newSharkY
-					sharkDirection = area[sharkX][sharkY].direction
-					eat += area[sharkX][sharkY].fishNum
-					fishes[area[sharkX][sharkY].fishNum-1] = fish{}
-					area[sharkX][sharkY].fishNum = 0
-					area[sharkX][sharkY].direction = 0
-					newElement := Element{fishes, area, sharkX, sharkY, sharkDirection, eat}
+					newDirection := area[newSharkX][newSharkY].direction
+					newFishes := make([]fish, 16)
+					copy(newFishes, fishes)
+					newFishes[area[newSharkX][newSharkY].fishNum-1] = fish{}
+					newArea := make([][]fish, 4)
+					for j := 0; j < 4; j++ {
+						newArea[j] = make([]fish, 4)
+					}
+					for j := 0; j < 4; j++ {
+						copy(newArea[j], area[j])
+					}
+					newEat := eat + newArea[newSharkX][newSharkY].fishNum
+					newArea[newSharkX][newSharkY].fishNum = 0
+					newArea[newSharkX][newSharkY].direction = 0
+					newElement := Element{newFishes, newArea, newSharkX, newSharkY, newDirection, newEat}
 					q.Push(newElement)
 				}
 			}
