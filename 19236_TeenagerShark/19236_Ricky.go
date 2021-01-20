@@ -8,6 +8,10 @@ type fish struct {
 	x, y, fishNum, direction int
 }
 
+func (f fish) String() string {
+	return fmt.Sprintf("(%d, %d) %d번", f.x, f.y, f.fishNum)
+}
+
 type Element struct {
 	fishes                              []fish
 	area                                [][]fish
@@ -56,6 +60,7 @@ func main() {
 	sharkDirection = area[0][0].direction
 	sharkX, sharkY = 0, 0
 	eat += area[0][0].fishNum
+	fishes[area[0][0].fishNum-1] = fish{}
 	area[0][0].fishNum = 0
 	area[0][0].direction = 0
 
@@ -83,8 +88,14 @@ func main() {
 			for i := 0; i < 16; i++ {
 				var newX, newY, rotateCount int
 
-				fmt.Println(fishes)
-				fmt.Println(i+1, "번째 물고기 이동")
+				fmt.Println("물고기 목록: ", fishes)
+				if fishes[i].direction == 0 {
+					fmt.Println(i+1, "번째 물고기는 이미 먹혔으므로 이동하지 않습니다.")
+					fmt.Println("========")
+					rotateCount = 8
+				} else {
+					fmt.Println(i+1, "번째 물고기 이동")
+				}
 				for rotateCount != 8 {
 					switch fishes[i].direction {
 					case 1:
@@ -104,20 +115,24 @@ func main() {
 					case 8:
 						newX, newY = fishes[i].x-1, fishes[i].y+1
 					}
-					if newX < 0 || newX > 16 || newY < 0 || newY > 16 { // 범위를 벗어나는 경우
+					if newX < 0 || newX > 3 || newY < 0 || newY > 3 { // 범위를 벗어나는 경우
 						fishes[i].direction++
+						area[fishes[i].x][fishes[i].y].direction++
 						rotateCount++
 						if fishes[i].direction == 9 {
 							fishes[i].direction = 1
+							area[fishes[i].x][fishes[i].y].direction = 1
 						}
 					} else if newX == sharkX && newY == sharkY { // 상어를 만나는 경우
 						fishes[i].direction++
+						area[fishes[i].x][fishes[i].y].direction++
 						rotateCount++
 						if fishes[i].direction == 9 {
 							fishes[i].direction = 1
+							area[fishes[i].x][fishes[i].y].direction = 1
 						}
 					} else { // 물고기 만나거나 빈칸
-						fmt.Println(area[newX][newY].fishNum, "번째 물고기와 교체 ", fishes[i], fishes[area[newX][newY].fishNum-1])
+						fmt.Println(area[newX][newY].fishNum, "번째 물고기와 교체 ")
 
 						// tempX = fishes[area[newX][newY].fishNum-1].x
 						// fishes[area[newX][newY].fishNum-1].x = fishes[i].x
@@ -126,15 +141,25 @@ func main() {
 						// tempY = fishes[area[newX][newY].fishNum-1].y
 						// fishes[area[newX][newY].fishNum-1].y = fishes[i].y
 						// fishes[i].y = tempY
+						fmt.Println("이동 전 area")
 
-						fishes[area[newX][newY].fishNum-1].x, fishes[i].x = fishes[i].x, fishes[area[newX][newY].fishNum-1].x
-						fishes[area[newX][newY].fishNum-1].y, fishes[i].y = fishes[i].y, fishes[area[newX][newY].fishNum-1].y
+						tempX := fishes[i].x
+						tempY := fishes[i].y
 
-						fmt.Println("교체 후 ", fishes[i], fishes[area[newX][newY].fishNum-1])
+						fishes[area[newX][newY].fishNum-1].x, fishes[i].x = fishes[i].x, newX
+						fishes[area[newX][newY].fishNum-1].y, fishes[i].y = fishes[i].y, newY
+						for k := 0; k < 4; k++ {
+							fmt.Println(area[k])
+						}
 
-						area[newX][newY], area[fishes[i].x][fishes[i].y] = area[fishes[i].x][fishes[i].y], area[newX][newY]
+						area[newX][newY], area[tempX][tempY] = area[tempX][tempY], area[newX][newY]
+						area[newX][newY].x, area[tempX][tempY].x = area[tempX][tempY].x, area[newX][newY].x
+						area[newX][newY].y, area[tempX][tempY].y = area[tempX][tempY].y, area[newX][newY].y
 
-						fmt.Println(area)
+						fmt.Println("이동 후 area")
+						for k := 0; k < 4; k++ {
+							fmt.Println(area[k])
+						}
 						fmt.Println("=========")
 
 						break
@@ -163,7 +188,7 @@ func main() {
 				case 8:
 					newSharkX, newSharkY = sharkX-i, sharkY+i
 				}
-				if newSharkX < 0 || newSharkX > 16 || newSharkY < 0 || newSharkY > 16 { // 범위를 벗어나는 경우
+				if newSharkX < 0 || newSharkX > 3 || newSharkY < 0 || newSharkY > 3 { // 범위를 벗어나는 경우
 					break
 				} else if area[newSharkX][newSharkY].fishNum == 0 { // 물고기가 없는 칸으로 갈 경우
 					break
@@ -171,6 +196,7 @@ func main() {
 					sharkX, sharkY = newSharkX, newSharkY
 					sharkDirection = area[sharkX][sharkY].direction
 					eat += area[sharkX][sharkY].fishNum
+					fishes[area[sharkX][sharkY].fishNum-1] = fish{}
 					area[sharkX][sharkY].fishNum = 0
 					area[sharkX][sharkY].direction = 0
 					newElement := Element{fishes, area, sharkX, sharkY, sharkDirection, eat}
