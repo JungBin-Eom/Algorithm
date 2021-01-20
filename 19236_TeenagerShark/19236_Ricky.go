@@ -82,10 +82,11 @@ func main() {
 			sharkY = nowElement.sharkY
 			sharkDirection = nowElement.sharkDirection
 
-			fmt.Println("지금 상태의 상어는 ", eat, "만큼 먹었고 지금까지 최대값은 ", bestEat, "입니다.")
 			if eat > bestEat {
 				bestEat = eat
 			}
+			fmt.Println("지금 상태의 상어는 ", eat, "만큼 먹었고 지금까지 최대값은 ", bestEat, "입니다.")
+
 			// 물고기 이동
 			for i := 0; i < 16; i++ {
 				var newX, newY, rotateCount int
@@ -96,7 +97,7 @@ func main() {
 					fmt.Println("========")
 					rotateCount = 8
 				} else {
-					fmt.Println(i+1, "번째 물고기 이동")
+					fmt.Println(i+1, "번 물고기 이동")
 				}
 				for rotateCount != 8 {
 					switch fishes[i].direction {
@@ -134,11 +135,13 @@ func main() {
 							area[fishes[i].x][fishes[i].y].direction = 1
 						}
 					} else { // 물고기 만나거나 빈칸
+						tempX := fishes[i].x
+						tempY := fishes[i].y
 						if area[newX][newY].fishNum == 0 {
 							fmt.Println("빈칸으로 이동")
 							fishes[i].x, fishes[i].y = newX, newY
 						} else {
-							fmt.Println(area[newX][newY].fishNum, "번째 물고기와 교체 ")
+							fmt.Println(area[newX][newY].fishNum, "번 물고기와 교체 ")
 							fishes[area[newX][newY].fishNum-1].x, fishes[i].x = fishes[i].x, newX
 							fishes[area[newX][newY].fishNum-1].y, fishes[i].y = fishes[i].y, newY
 						}
@@ -156,8 +159,7 @@ func main() {
 							fmt.Println(area[k])
 						}
 
-						tempX := fishes[i].x
-						tempY := fishes[i].y
+						fmt.Println(area[newX][newY], "<=>", area[tempX][tempY])
 
 						area[newX][newY], area[tempX][tempY] = area[tempX][tempY], area[newX][newY]
 						area[newX][newY].x, area[tempX][tempY].x = area[tempX][tempY].x, area[newX][newY].x
@@ -213,4 +215,5 @@ func main() {
 			}
 		}
 	}
+	fmt.Println(bestEat)
 }
