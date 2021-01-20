@@ -30,4 +30,5 @@ func main() {
 
 	fmt.Println(q.Pop())
 	fmt.Println(q.Pop())
+
 }
