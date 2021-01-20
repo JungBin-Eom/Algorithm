@@ -9,7 +9,7 @@ type fish struct {
 }
 
 func (f fish) String() string {
-	return fmt.Sprintf("(%d, %d) %d번", f.x, f.y, f.fishNum)
+	return fmt.Sprintf("(%d, %d) %d번(%d)", f.x, f.y, f.fishNum, f.direction)
 }
 
 type Element struct {
@@ -38,6 +38,7 @@ func (q *Queue) Pop() (Element, bool) {
 }
 
 func main() {
+	fmt.Printf("\n\n\n\n\n\n\n")
 	var fishNum, direction int
 	var sharkX, sharkY, sharkDirection, eat, bestEat int
 
@@ -81,6 +82,7 @@ func main() {
 			sharkY = nowElement.sharkY
 			sharkDirection = nowElement.sharkDirection
 
+			fmt.Println("지금 상태의 상어는 ", eat, "만큼 먹었고 지금까지 최대값은 ", bestEat, "입니다.")
 			if eat > bestEat {
 				bestEat = eat
 			}
@@ -132,7 +134,14 @@ func main() {
 							area[fishes[i].x][fishes[i].y].direction = 1
 						}
 					} else { // 물고기 만나거나 빈칸
-						fmt.Println(area[newX][newY].fishNum, "번째 물고기와 교체 ")
+						if area[newX][newY].fishNum == 0 {
+							fmt.Println("빈칸으로 이동")
+							fishes[i].x, fishes[i].y = newX, newY
+						} else {
+							fmt.Println(area[newX][newY].fishNum, "번째 물고기와 교체 ")
+							fishes[area[newX][newY].fishNum-1].x, fishes[i].x = fishes[i].x, newX
+							fishes[area[newX][newY].fishNum-1].y, fishes[i].y = fishes[i].y, newY
+						}
 
 						// tempX = fishes[area[newX][newY].fishNum-1].x
 						// fishes[area[newX][newY].fishNum-1].x = fishes[i].x
@@ -141,16 +150,14 @@ func main() {
 						// tempY = fishes[area[newX][newY].fishNum-1].y
 						// fishes[area[newX][newY].fishNum-1].y = fishes[i].y
 						// fishes[i].y = tempY
+
 						fmt.Println("이동 전 area")
-
-						tempX := fishes[i].x
-						tempY := fishes[i].y
-
-						fishes[area[newX][newY].fishNum-1].x, fishes[i].x = fishes[i].x, newX
-						fishes[area[newX][newY].fishNum-1].y, fishes[i].y = fishes[i].y, newY
 						for k := 0; k < 4; k++ {
 							fmt.Println(area[k])
 						}
+
+						tempX := fishes[i].x
+						tempY := fishes[i].y
 
 						area[newX][newY], area[tempX][tempY] = area[tempX][tempY], area[newX][newY]
 						area[newX][newY].x, area[tempX][tempY].x = area[tempX][tempY].x, area[newX][newY].x
@@ -160,6 +167,7 @@ func main() {
 						for k := 0; k < 4; k++ {
 							fmt.Println(area[k])
 						}
+
 						fmt.Println("=========")
 
 						break
