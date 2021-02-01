@@ -43,30 +43,38 @@ func main() {
 
 	for year := 0; year < K; year++ {
 		for i := 0; i < N; i++ {
-			addition[i] = make([]int, N)
-		}
-		for i := 0; i < N; i++ {
 			for j := 0; j < N; j++ {
 				if len(treeSlice[i][j]) != 0 {
+					var alive, die, dieIndex int
+					dieIndex = 999
 					for index, t := range treeSlice[i][j] {
-						var alive, die int
 						if area[i][j] >= t.age*t.count { // 현재 age의 나무가 모두 섭취할 만큼의 양분이 있는 경우
 							area[i][j] -= t.age * t.count
 							treeSlice[i][j][index].age++
-						} else if area[i][j]/t.age != 0 { // 모든 나무가 양분을 섭취할 수 없는 경우(몇그루는 가능)
+						} else if area[i][j]/t.age > 0 { // 모든 나무가 양분을 섭취할 수 없는 경우(몇그루는 가능)
 							alive = area[i][j] / t.age      // 섭취할 수 있는 나무의 최대 수
 							die = t.count - alive           // 나머지는 다 죽음
 							area[i][j] -= alive * t.age     // 봄(양분 섭취)
 							area[i][j] += (t.age / 2) * die // 여름
 							treeSlice[i][j][index].age++
 							treeSlice[i][j][index].count = alive
-							treeSlice[i][j] = treeSlice[i][j][:index+1]
-							break
+							// treeSlice[i][j] = treeSlice[i][j][:index+1]
+							// break
+							if index < dieIndex {
+								dieIndex = index + 1
+							}
 						} else if area[i][j]/t.age == 0 { // 나무 모두 양분 섭취 불가능
 							area[i][j] += (t.age / 2) * t.count
-							treeSlice[i][j] = treeSlice[i][j][:index]
-							break
+							treeSlice[i][j][index].count = 0
+							// treeSlice[i][j] = treeSlice[i][j][:index]
+							// break
+							if index < dieIndex {
+								dieIndex = index
+							}
 						}
+					}
+					if dieIndex != 999 {
+						treeSlice[i][j] = treeSlice[i][j][:dieIndex]
 					}
 				}
 			}
@@ -92,6 +100,7 @@ func main() {
 			for j := 0; j < N; j++ {
 				if addition[i][j] != 0 {
 					treeSlice[i][j] = append([]tree{{1, addition[i][j]}}, treeSlice[i][j]...)
+					addition[i][j] = 0
 				}
 			}
 		}
