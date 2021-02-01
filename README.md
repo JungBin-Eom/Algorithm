@@ -14,4 +14,5 @@
 |Week1|16236 아기상어|https://jbhs7014.tistory.com/120|
 |Week2|14501 퇴사|https://jbhs7014.tistory.com/122|
 |Week3|19236 청소년상어|https://jbhs7014.tistory.com/124|
-|Week4|16235 나무 재테크|-|
+|Week4|16235 나무 재테크|https://jbhs7014.tistory.com/127|
+|Week5|2210 숫자판 점프|-|
