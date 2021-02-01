@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
+	"sort"
 )
 
 type tree struct {
-	age, count int
+	x, y, age int
 }
-
-type allAgeTrees []tree
 
 var N, M, K int
 var moveX, moveY []int
@@ -21,12 +20,13 @@ func main() {
 	area := make([][]int, N)
 	S2D2 := make([][]int, N)
 	addition := make([][]int, N)
-	treeSlice := make([][]allAgeTrees, N)
+	var treeSlice []tree
+	var alive []tree
+	var die []tree
 	for i := 0; i < N; i++ {
 		area[i] = make([]int, N)
 		addition[i] = make([]int, N)
 		S2D2[i] = make([]int, N)
-		treeSlice[i] = make([]allAgeTrees, N)
 		for j := 0; j < N; j++ {
 			var nutrient int
 			fmt.Scan(&nutrient)
@@ -38,95 +38,65 @@ func main() {
 	for i := 0; i < M; i++ {
 		var x, y, age int
 		fmt.Scan(&x, &y, &age)
-		treeSlice[x-1][y-1] = append(treeSlice[x-1][y-1], tree{age, 1})
+		treeSlice = append(treeSlice, tree{x - 1, y - 1, age})
 	}
 
 	for year := 0; year < K; year++ {
-		for i := 0; i < N; i++ {
-			for j := 0; j < N; j++ {
-				if len(treeSlice[i][j]) != 0 {
-					var alive, die, dieIndex int
-					dieIndex = 999
-					for index, t := range treeSlice[i][j] {
-						if area[i][j] >= t.age*t.count { // 현재 age의 나무가 모두 섭취할 만큼의 양분이 있는 경우
-							area[i][j] -= t.age * t.count
-							treeSlice[i][j][index].age++
-						} else if area[i][j]/t.age > 0 { // 모든 나무가 양분을 섭취할 수 없는 경우(몇그루는 가능)
-							alive = area[i][j] / t.age      // 섭취할 수 있는 나무의 최대 수
-							die = t.count - alive           // 나머지는 다 죽음
-							area[i][j] -= alive * t.age     // 봄(양분 섭취)
-							area[i][j] += (t.age / 2) * die // 여름
-							treeSlice[i][j][index].age++
-							treeSlice[i][j][index].count = alive
-							// treeSlice[i][j] = treeSlice[i][j][:index+1]
-							// break
-							if index < dieIndex {
-								dieIndex = index + 1
-							}
-						} else if area[i][j]/t.age == 0 { // 나무 모두 양분 섭취 불가능
-							area[i][j] += (t.age / 2) * t.count
-							treeSlice[i][j][index].count = 0
-							// treeSlice[i][j] = treeSlice[i][j][:index]
-							// break
-							if index < dieIndex {
-								dieIndex = index
-							}
-						}
-					}
-					if dieIndex != 999 {
-						treeSlice[i][j] = treeSlice[i][j][:dieIndex]
-					}
-				}
-			}
-		}
-		for i := 0; i < N; i++ {
-			for j := 0; j < N; j++ {
-				if len(treeSlice[i][j]) != 0 {
-					for _, t := range treeSlice[i][j] {
-						if t.age%5 == 0 { // 번식
-							for k := 0; k < 8; k++ {
-								if i+moveX[k] >= 0 && i+moveX[k] < N && j+moveY[k] >= 0 && j+moveY[k] < N {
-									addition[i+moveX[k]][j+moveY[k]] += t.count
-								}
-							}
-						}
-					}
-				}
-				area[i][j] += S2D2[i][j] // 겨울 양분 추가
-			}
-		}
+		sort.Slice(treeSlice, func(i, j int) bool {
+			return treeSlice[i].age < treeSlice[j].age
+		})
 
-		for i := 0; i < N; i++ {
-			for j := 0; j < N; j++ {
-				if addition[i][j] != 0 {
-					treeSlice[i][j] = append([]tree{{1, addition[i][j]}}, treeSlice[i][j]...)
-					addition[i][j] = 0
-				}
+		// 봄(나이만큼 양분을 섭취)
+		for _, t := range treeSlice {
+			if area[t.x][t.y] >= t.age {
+				area[t.x][t.y] -= t.age
+				alive = append(alive, tree{t.x, t.y, t.age + 1})
+			} else {
+				die = append(die, tree{t.x, t.y, t.age})
 			}
 		}
-		fmt.Println("========", year+1, "년후=======")
-		fmt.Println("현재 나무")
-		for i := 0; i < N; i++ {
-			fmt.Println(treeSlice[i])
+		treeSlice = []tree{}
+
+		// 여름(죽은 나무 양분 추가)
+		for _, t := range die {
+			area[t.x][t.y] += t.age / 2
 		}
-		fmt.Println()
-		fmt.Println("양분")
-		for i := 0; i < N; i++ {
-			fmt.Println(area[i])
+		die = []tree{}
+
+		// 가을(나이가 5의 배수인 나무는 번식)
+		for _, t := range alive {
+			if t.age%5 == 0 {
+				for k := 0; k < 8; k++ {
+					var tempX, tempY int
+					tempX = t.x + moveX[k]
+					tempY = t.y + moveY[k]
+					if tempX >= 0 && tempX < N && tempY >= 0 && tempY < N {
+						treeSlice = append(treeSlice, tree{tempX, tempY, 1})
+					}
+				}
+			}
+			treeSlice = append(treeSlice, t)
 		}
-		fmt.Println("======================")
+		alive = []tree{}
+
+		// 겨울(S2D2가 양분 추가)
+		for i := 0; i < N; i++ {
+			for j := 0; j < N; j++ {
+				area[i][j] += S2D2[i][j]
+			}
+		}
+		// fmt.Println("========", year+1, "년후=======")
+		// fmt.Println("현재 나무")
+		// fmt.Println(treeSlice)
+		// fmt.Println()
+		// fmt.Println("양분")
+		// for i := 0; i < N; i++ {
+		// 	fmt.Println(area[i])
+		// }
+		// fmt.Println("======================")
 	}
 
-	var result int
-	for i := 0; i < N; i++ {
-		for j := 0; j < N; j++ {
-			if len(treeSlice[i][j]) != 0 {
-				for _, t := range treeSlice[i][j] {
-					result += t.count
-				}
-			}
-		}
-	}
+	result := len(treeSlice)
 
 	fmt.Println(result)
 }
