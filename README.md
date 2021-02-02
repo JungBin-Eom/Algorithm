@@ -9,7 +9,7 @@
 3. 해결한 방법(알고리즘, 구현)과 어려웠던 점을 기록한다.
 
 ### Blog Record
-|날짜|번호|Ricky|
+|날짜|번호|블로그 링크|
 |:---:|:---:|:---:|
 |Week1|16236 아기상어|https://jbhs7014.tistory.com/120|
 |Week2|14501 퇴사|https://jbhs7014.tistory.com/122|
