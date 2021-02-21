@@ -9,10 +9,11 @@
 3. 해결한 방법(알고리즘, 구현)과 어려웠던 점을 기록한다.
 
 ### Blog Record
-|날짜|번호|블로그 링크|
+|순서|문제 번호|블로그 링크|
 |:---:|:---:|:---:|
 |Week1|16236 아기상어|https://jbhs7014.tistory.com/120|
 |Week2|14501 퇴사|https://jbhs7014.tistory.com/122|
 |Week3|19236 청소년상어|https://jbhs7014.tistory.com/124|
 |Week4|16235 나무 재테크|https://jbhs7014.tistory.com/127|
 |Week5|2210 숫자판 점프|https://jbhs7014.tistory.com/129|
+|Week6|14889 스타트와 링크|-|
