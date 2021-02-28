@@ -1,5 +1,6 @@
 # Algorithm
-이 repository는 Ricky의 겨울방학 알고리즘 스터디 코드 저장소입니다.
+이 repository는 Ricky의 겨울방학 알고리즘 스터디 코드 저장소입니다.  
+알고리즘 공부는 꾸준해야 한다고 생각하기 때문에 겨울방학에 이어서 계속 한주에 한문제씩 풀고 정리합니다.
   
 ---
   
@@ -16,4 +17,4 @@
 |Week3|19236 청소년상어|https://jbhs7014.tistory.com/124|
 |Week4|16235 나무 재테크|https://jbhs7014.tistory.com/127|
 |Week5|2210 숫자판 점프|https://jbhs7014.tistory.com/129|
-|Week6|14889 스타트와 링크|-|
+|Week6|14889 스타트와 링크|https://jbhs7014.tistory.com/132|
