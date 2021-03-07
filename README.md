@@ -19,3 +19,4 @@
 |Week5|2210 숫자판 점프|https://jbhs7014.tistory.com/129|
 |Week6|14889 스타트와 링크|https://jbhs7014.tistory.com/132|
 |Week7|15686 치킨 배달|https://jbhs7014.tistory.com/134|
+|Week8|3190 뱀|-|
