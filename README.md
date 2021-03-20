@@ -20,4 +20,4 @@
 |Week6|14889 스타트와 링크|https://jbhs7014.tistory.com/132|
 |Week7|15686 치킨 배달|https://jbhs7014.tistory.com/134|
 |Week8|3190 뱀|https://jbhs7014.tistory.com/136|
-|Week9|17140 이차원 배열과 연산|-|
+|Week9|17140 이차원 배열과 연산|https://jbhs7014.tistory.com/140|
