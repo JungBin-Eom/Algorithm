@@ -23,4 +23,4 @@
 |Week9|17140 이차원 배열과 연산|https://jbhs7014.tistory.com/140|
 |Week10|14499 주사위 굴리기|https://jbhs7014.tistory.com/144|
 |Week11|5373 큐빙|https://jbhs7014.tistory.com/148|
-|Week12|17143 낚시왕|-|
+|Week12|[2020 카카오 인턴] 키패드 누르기|-|
