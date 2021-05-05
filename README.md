@@ -25,4 +25,5 @@
 |Week11|5373 큐빙|https://jbhs7014.tistory.com/148|
 |Week12|[2020 카카오 인턴] 키패드 누르기|https://jbhs7014.tistory.com/159|
 |Week13|[2020 카카오 인턴] 수식 최대화|https://jbhs7014.tistory.com/161|
-|Week14|[2020 카카오 인턴] 보석 쇼핑|-|
+|Week14|[2020 카카오 인턴] 보석 쇼핑|https://jbhs7014.tistory.com/163|
+|Week15|[2020 카카오 인턴] 경주로 건설|-|
