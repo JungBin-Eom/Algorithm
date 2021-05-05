@@ -7,22 +7,22 @@ def solution(gems):
 
   while pointR < len(gems) and pointL < len(gems):
     if len(myGem) == gemKind:
-      if pointL - pointR < answer[1] - answer[0]:
-        answer[0] = pointR+1
-        answer[1] = pointL+1
-      if myGem[gems[pointR]] == 1:
-        del(myGem[gems[pointR]])
+      if pointR - pointL < answer[1] - answer[0]:
+        answer[0] = pointL+1
+        answer[1] = pointR+1
+      if myGem[gems[pointL]] == 1:
+        del(myGem[gems[pointL]])
       else:
-        myGem[gems[pointR]] -= 1
-      pointR += 1
-    else:
+        myGem[gems[pointL]] -= 1
       pointL += 1
-      if pointL == len(gems):
+    else:
+      pointR += 1
+      if pointR == len(gems):
         break
-      if gems[pointL] in myGem.keys():
-        myGem[gems[pointL]] += 1
+      if gems[pointR] in myGem.keys():
+        myGem[gems[pointR]] += 1
       else:
-        myGem[gems[pointL]] = 1  
+        myGem[gems[pointR]] = 1  
 
   #   print()
   #   print(myGem)
