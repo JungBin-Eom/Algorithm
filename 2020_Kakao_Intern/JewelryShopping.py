@@ -2,23 +2,27 @@ def solution(gems):
   pointR = 0
   pointL = 0
   answer = [0, 100000]
-  gemKind = len(list(set(gems)))
-  myGem = {}
-  for gem in gems:
-    myGem[gem] = 0
+  myGem = {gems[pointR]:1}
+  gemKind = len(set(gems))
 
-  while pointR != len(gems) and pointL != len(gems) and pointR >= pointL:
-    if 0 in myGem.values():
-      myGem[gems[pointR]] += 1
+  while pointR < len(gems) and pointL < len(gems):
+    if len(myGem) == gemKind:
+      if pointL - pointR < answer[1] - answer[0]:
+        answer[0] = pointR+1
+        answer[1] = pointL+1
+      if myGem[gems[pointR]] == 1:
+        del(myGem[gems[pointR]])
+      else:
+        myGem[gems[pointR]] -= 1
       pointR += 1
-    if 0 not in myGem.values():
-      if pointR - pointL < answer[1] - answer[0]:
-        answer[0] = pointL+1
-        answer[1] = pointR
-      if pointR - pointL + 1 == gemKind:
-        break
-      myGem[gems[pointL]] -= 1
+    else:
       pointL += 1
+      if pointL == len(gems):
+        break
+      if gems[pointL] in myGem.keys():
+        myGem[gems[pointL]] += 1
+      else:
+        myGem[gems[pointL]] = 1  
 
   #   print()
   #   print(myGem)
@@ -28,5 +32,3 @@ def solution(gems):
 
   # print(answer)
   return answer
-
-# solution([["XYZ", "XYZ", "XYZ"])
