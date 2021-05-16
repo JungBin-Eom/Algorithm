@@ -28,3 +28,4 @@
 |Week14|[2020 카카오 인턴] 보석 쇼핑|https://jbhs7014.tistory.com/163|
 |Week15|[2020 카카오 인턴] 경주로 건설|https://jbhs7014.tistory.com/165|
 |Week16|20055 컨베이어 벨트 위의 로봇|https://jbhs7014.tistory.com/169|
+|Week17|21608 상어 초등학교|-|
