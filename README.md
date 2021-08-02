@@ -31,4 +31,4 @@
 |Week17|21608 상어 초등학교|https://jbhs7014.tistory.com/173|
 |Week18|21609 상어 중학교|https://jbhs7014.tistory.com/176|
 |Week19|[프로그래머스]가장 먼 노드|https://jbhs7014.tistory.com/190|
-|Week20|[프로그래머스]불량 사용자|-|
+|Week20|[프로그래머스]불량 사용자|https://jbhs7014.tistory.com/193|
