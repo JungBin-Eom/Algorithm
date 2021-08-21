@@ -34,4 +34,4 @@
 |Week19|[프로그래머스]가장 먼 노드|https://jbhs7014.tistory.com/190|
 |Week20|[프로그래머스]불량 사용자|https://jbhs7014.tistory.com/193|
 |Week21|[프로그래머스]징검다리 건너기|https://jbhs7014.tistory.com/195|
-|Week22|[프로그래머스]퍼즐 조각 채우기|-|
+|Week22|[프로그래머스]퍼즐 조각 채우기|https://jbhs7014.tistory.com/196|
