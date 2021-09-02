@@ -62,3 +62,5 @@ def solution(m, n, board):
   return answer
 
 solution(6, 6, ["TTTANT", "RRFACC", "RRRFCC", "TRRRAA", "TTMMMF", "TMMTTJ"])
+
+# 1시간 9분
