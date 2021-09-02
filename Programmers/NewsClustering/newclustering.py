@@ -49,3 +49,5 @@ def solution(str1, str2):
   return answer
 
 solution("aa1+aa2", "AAAA12")
+
+# 38분
