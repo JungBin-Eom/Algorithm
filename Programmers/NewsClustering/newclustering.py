@@ -39,7 +39,7 @@ def solution(str1, str2):
   inter = intersection(str1List, str2List)
   uni = union(str1List, str2List)
 
-  if len(inter) == 0:
+  if len(uni) == 0:
     answer = 1
   else:
     answer = len(inter) / len(uni)
