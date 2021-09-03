@@ -36,4 +36,4 @@
 |Week21|[프로그래머스]징검다리 건너기|https://jbhs7014.tistory.com/195|
 |Week22|[프로그래머스]퍼즐 조각 채우기|https://jbhs7014.tistory.com/196|
 |Week23|[프로그래머스]셔틀버스|https://jbhs7014.tistory.com/198|
-|Week24|[프로그래머스]뉴스 클러스터링|-|
+|Week24|[프로그래머스]뉴스 클러스터링|https://jbhs7014.tistory.com/201|
