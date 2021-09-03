@@ -2,7 +2,7 @@
 
 import math
 
-def intersection(list1, list2):
+def union(list1, list2):
   result = list1[:]
   list1Copy = list1[:]
   for item in list2:
@@ -12,7 +12,7 @@ def intersection(list1, list2):
       list1Copy.remove(item)
   return result
 
-def union(list1, list2):
+def intersection(list1, list2):
   result = []
   list1Copy = list1[:]
   for item in list2:
@@ -42,7 +42,7 @@ def solution(str1, str2):
   if len(inter) == 0:
     answer = 1
   else:
-    answer = len(uni) / len(inter)
+    answer = len(inter) / len(uni)
   answer *= 65536
   answer = math.trunc(answer)
   # print(answer)
