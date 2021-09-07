@@ -32,3 +32,4 @@ def solution(orders, course):
 solution(["XYZ", "XWY", "WXA"], [2, 3, 4])
 
 # 39분
+# counter도 사용해보자
